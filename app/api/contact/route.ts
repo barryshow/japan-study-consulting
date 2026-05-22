@@ -26,12 +26,15 @@ export async function POST(request: Request) {
     });
 
     if (!res.ok) {
-      const err = await res.text();
-      return NextResponse.json({ error: err }, { status: 500 });
-    }
+        const err = await res.text();
+        console.error("Supabase 写入失败:", res.status, err);
+        return NextResponse.json({ error: `数据库错误(${res.status}): ${err}` }, { status: 500 });
+      }
 
     return NextResponse.json({ success: true });
   } catch (e) {
-    return NextResponse.json({ error: "服务器错误" }, { status: 500 });
+    const msg = e instanceof Error ? e.message : "未知错误";
+    console.error("API 异常:", msg);
+    return NextResponse.json({ error: `服务器错误: ${msg}` }, { status: 500 });
   }
 }
