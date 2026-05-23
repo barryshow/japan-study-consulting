@@ -167,7 +167,7 @@ export default function VocationalPage() {
               />
               <div className="grid gap-6 lg:grid-cols-2 mt-8">
                 {schools.map((school) => (
-                  <div key={school.id} className="rounded-xl border border-zinc-200 bg-white p-6">
+                  <div key={school.id} id={school.id} className="rounded-xl border border-zinc-200 bg-white p-6 scroll-mt-20">
                     <div className="flex items-start justify-between gap-3">
                       <div>
                         <h3 className="text-xl font-bold text-primary-900">{school.name}</h3>

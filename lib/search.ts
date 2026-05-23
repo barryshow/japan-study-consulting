@@ -42,7 +42,7 @@ function buildItems(): SearchableItem[] {
       subtitle: `${s.category} · ${s.location}`,
       type: "vocational",
       typeLabel: "专门学校",
-      href: "/services/vocational",
+      href: "/services/vocational#" + s.id,
       keywords,
     });
   }
@@ -59,7 +59,7 @@ function buildItems(): SearchableItem[] {
       subtitle: `语言学校 · ${s.location}`,
       type: "language",
       typeLabel: "语言学校",
-      href: "/services/language-school",
+      href: "/services/language-school#" + s.id,
       keywords,
     });
   }
@@ -76,7 +76,7 @@ function buildItems(): SearchableItem[] {
       subtitle: `${u.type === "national" ? "国公立" : u.type === "public" ? "公立" : "私立"}大学 · ${u.location}`,
       type: "university",
       typeLabel: "大学",
-      href: u.type === "national" || u.type === "public" ? "/services/graduate" : "/services/undergraduate",
+      href: "/services/graduate#" + u.id,
       keywords,
     });
   }

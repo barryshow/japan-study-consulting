@@ -77,7 +77,7 @@ export default function GraduatePage() {
         subtitle="日本顶尖国立大学院，学费统一，科研实力雄厚"
       >
         {nationalUniversities.map((uni) => (
-          <div key={uni.id} className="rounded-xl border border-zinc-200 bg-white p-6">
+          <div key={uni.id} id={uni.id} className="rounded-xl border border-zinc-200 bg-white p-6 scroll-mt-20">
             <div className="flex items-start justify-between gap-3">
               <h3 className="text-xl font-bold text-primary-900">{uni.name}</h3>
               <span className="shrink-0 rounded-full bg-primary-100 px-2 py-0.5 text-xs font-medium text-primary-700">{uni.ranking}</span>
@@ -128,7 +128,7 @@ export default function GraduatePage() {
         subtitle="国际化程度高，就职支援强大，留学生规模大"
       >
         {privateUniversities.map((uni) => (
-          <div key={uni.id} className="rounded-xl border border-zinc-200 bg-white p-6">
+          <div key={uni.id} id={uni.id} className="rounded-xl border border-zinc-200 bg-white p-6 scroll-mt-20">
             <div className="flex items-start justify-between gap-3">
               <h3 className="text-xl font-bold text-primary-900">{uni.name}</h3>
               <span className="shrink-0 rounded-full bg-accent-100 px-2 py-0.5 text-xs font-medium text-accent-600">{uni.ranking}</span>
