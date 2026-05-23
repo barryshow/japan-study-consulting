@@ -60,66 +60,109 @@ export const undergraduateAdmissions: UndergraduateAdmissionInfo[] = [
     universityName: "东京大学",
     type: "national",
     portalUrl: "https://www.u-tokyo.ac.jp/ja/admissions/undergraduate.html",
-    admissionSystem: "外国学校卒業学生特別選考（私費外国人留学生）— 全科类统一选考。前期課程（2年·教養学部）入學后再分专业。出願時選科類（文一文二文三/理一理二理三），第1次書類審査→第2次学力試験（小論文+学力試験+面接）。",
+    admissionSystem: "外国学校卒業学生特別選考（私費外国人留学生）— 全科类统一选考。前期課程（2年·教養学部）入學后再分专业。出願時選科類（文一文二文三/理一理二理三），第1次書類審査→第2次学力試験（小論文+学力試験+面接）。入学后2年间在教養学部接受通识教育，3年级起依据成绩「進学振分」进入各学部。",
     ejuPolicy: "必须提交。文科類：日本語+総合科目+数学1。理科類：日本語+数学2+理科（物理·化学·生物中选2科）。2025年6月或11月成绩有效。",
     ejuReferenceScores:
       "【文科類】日本語350+ / 総合科目190+ / 数学1 180+ → 総合720+（合格者平均）。【理科類】日本語330+ / 数学2 180+ / 理科2科（物理+化学）170+ → 総合680+。【全科類】TOEFL iBT 100+ / IELTS 7.0+ 必须有。",
     faculties: [
       {
-        name: "文科一類 → 法学部·教養学部",
+        name: "文科一類（→法学部·教養学部）",
         nameJa: "文科一類",
-        departments: ["法学部第1類（総合法学）", "第2類（法律）", "第3類（政治）"],
+        departments: [
+          "【法学部】第1類（総合法学）", "第2類（法律プロフェッション）", "第3類（政治）",
+          "【教養学部後期】教養学科（国際関係·地域研究·文化人類学等）", "学際科学科", "統合自然科学科"
+        ],
         hasInternationalAdmission: true,
         admissionType: "外国学校卒業学生特別選考（第2次）",
         ejukRequirements: "日本語+総合科目+数学1",
-        englishRequirements: "TOEFL iBT / IELTS（出願2年内）"
+        ejuScoreReference: "日本語360+ / 総合190+ / 数学1 185+",
+        englishRequirements: "TOEFL iBT 100+ / IELTS 7.0+（出願2年内）",
+        notes: "文科一類→法学部为最强路径。法学部司法試験合格率日本トップ。教養学部后期课程可选国际关系方向。"
       },
       {
-        name: "文科二類 → 経済学部·教養学部",
+        name: "文科二類（→経済学部·教養学部）",
         nameJa: "文科二類",
-        departments: ["経済学科", "経営学科", "金融学科"],
+        departments: [
+          "【経済学部】経済学科（経済理論·経済政策·経済史）", "経営学科（経営戦略·金融·会計）", "金融学科（数量金融·金融工学·リスク管理）"
+        ],
         hasInternationalAdmission: true,
         admissionType: "外国学校卒業学生特別選考（第2次）",
         ejukRequirements: "日本語+総合科目+数学1",
-        englishRequirements: "TOEFL iBT / IELTS",
-        notes: "経済学部3学科均为热门，金融学科竞争最激烈"
+        ejuScoreReference: "日本語350+ / 総合190+ / 数学1 180+",
+        englishRequirements: "TOEFL iBT 100+ / IELTS 7.0+",
+        acceptanceRate: "金融学科競争率最高（3-5倍）",
+        notes: "経済学部3学科均为热门，金融学科竞争最激烈。経営学科分経営戦略·金融·会計三方向。"
       },
       {
-        name: "文科三類 → 文学部·教育学部·教養学部",
+        name: "文科三類（→文学部·教育学部·教養学部）",
         nameJa: "文科三類",
-        departments: ["人文学科（文学·史学·哲学·言語学·心理学等）", "総合教育科学科"],
+        departments: [
+          "【文学部】人文学科（哲学·中国思想文化学·倫理学·宗教学·美学芸術学）",
+          "人文学科（日本史学·東洋史学·西洋史学·考古学·文化人類学）",
+          "人文学科（言語学·日本語日本文学·中国語中国文学·英語英米文学·仏語仏文学等）",
+          "人文学科（心理学·社会学·社会心理学·図書館情報学）",
+          "【教育学部】総合教育科学科（教育学·教育心理学·教育社会学·生涯学習）",
+          "【教養学部後期】教養学科·学際科学科·統合自然科学科"
+        ],
         hasInternationalAdmission: true,
         admissionType: "外国学校卒業学生特別選考（第2次）",
         ejukRequirements: "日本語+総合科目+数学1",
-        englishRequirements: "TOEFL iBT / IELTS"
+        ejuScoreReference: "日本語350+ / 総合190+ / 数学1 180+",
+        englishRequirements: "TOEFL iBT 100+ / IELTS 7.0+"
       },
       {
-        name: "理科一類 → 工学部·理学部·薬学部",
+        name: "理科一類（→工学部·理学部·薬学部·教養学部）",
         nameJa: "理科一類",
-        departments: ["工学部16学科", "理学部10学科", "薬科学科"],
+        departments: [
+          "【工学部】社会基盤学科A（構造·材料·地盤）", "社会基盤学科B（計画·交通·流域）", "建築学科", "都市工学科（都市計画·都市環境）",
+          "機械工学科A（熱流体·設計·加工）", "機械工学科B（ロボット·制御·生体）", "機械情報工学科", "航空宇宙工学科",
+          "精密工学科", "電子情報工学科", "電気電子工学科", "物理工学科", "計数工学科（数理情報·システム情報）",
+          "マテリアル工学科A（金属·無機·加工）", "マテリアル工学科B（有機·高分子·バイオ）", "応用化学科", "化学システム工学科", "化学生命工学科", "システム創成学科",
+          "【理学部】数学科·情報科学科·物理学科·天文学科",
+          "地球惑星物理学科·地球惑星環境学科·化学科·生物化学科·生物学科·生物情報科学科",
+          "【薬学部】薬科学科（4年制·研究志向）",
+          "【教養学部後期】統合自然科学科（物理·数理·物質·生命·認知·スポーツ科学）"
+        ],
         hasInternationalAdmission: true,
         admissionType: "外国学校卒業学生特別選考（第2次）",
-        ejukRequirements: "日本語+数学2+理科（物理·化学·生物2科）",
-        englishRequirements: "TOEFL iBT / IELTS"
+        ejukRequirements: "日本語+数学2+理科（物理+化学推奨）",
+        ejuScoreReference: "日本語340+ / 数学2 185+ / 理科2科 180+",
+        englishRequirements: "TOEFL iBT 100+ / IELTS 7.0+",
+        acceptanceRate: "工学部各学科根据進学振分成績競爭，人気学科倍率2-5倍",
+        notes: "最大科類（合格人数最多）。工学部全国最大规模（16学科+4学科系）。進学振分：机械·航空宇宙人气最高。"
       },
       {
-        name: "理科二類 → 農学部·薬学部·理学部",
+        name: "理科二類（→農学部·薬学部·理学部·工学部）",
         nameJa: "理科二類",
-        departments: ["応用生命科学", "環境資源科学", "獣医学", "薬科学"],
+        departments: [
+          "【農学部】応用生命科学課程（生命化学·生命工学·生命機能制御·生物資源創成）",
+          "環境資源科学課程（森林環境資源·水圏生物生産·生物素材科学·環境地理情報）",
+          "獣医学課程（6年制·獣医師養成）",
+          "【薬学部】薬科学科（4年制·創薬研究）",
+          "【理学部】生物学科·生物化学科·生物情報科学科",
+          "【工学部】化学生命工学科·応用化学科·化学システム工学科"
+        ],
         hasInternationalAdmission: true,
         admissionType: "外国学校卒業学生特別選考（第2次）",
-        ejukRequirements: "日本語+数学2+理科（物理·化学·生物2科）",
-        englishRequirements: "TOEFL iBT / IELTS"
+        ejukRequirements: "日本語+数学2+理科（化学+物理/生物）",
+        ejuScoreReference: "日本語330+ / 数学2 175+ / 理科2科 175+",
+        englishRequirements: "TOEFL iBT 100+ / IELTS 7.0+",
+        notes: "理科二類→農学部為主要進路。獣医学課程日本最難関（定員30名、留学生枠极少）。生物学·化学方向特化。"
       },
       {
-        name: "理科三類 → 医学部医学科",
+        name: "理科三類（→医学部医学科）",
         nameJa: "理科三類",
-        departments: ["医学科（6年制）"],
+        departments: [
+          "【医学部】医学科（6年制·卒後医師国家試験+初期研修2年）",
+          "健康総合科学科（看護学·健康科学·公衆衛生学·医療政策·医史学）"
+        ],
         hasInternationalAdmission: true,
         admissionType: "外国学校卒業学生特別選考（第2次）",
-        ejukRequirements: "日本語+数学2+理科（物理·化学·生物2科）",
-        englishRequirements: "TOEFL iBT / IELTS",
-        notes: "难度最高（偏差值最高峰），留学生枠极少"
+        ejukRequirements: "日本語+数学2+理科（物理·化学·生物中选2科/化学必須）",
+        ejuScoreReference: "日本語350+ / 数学2 190+ / 理科2科 190+（日本最高レベル）",
+        englishRequirements: "TOEFL iBT 100+ / IELTS 7.0+",
+        acceptanceRate: "日本最高難度·倍率10-20倍·留学生枠极少（每年度1-2名）",
+        notes: "日本最难考学部，偏差値最高峰。留学生数月极少。很多年份留学生0合格。健康総合科学科相对可能性较高。"
       },
     ],
     examSchedule: "出願：2025年12月1日-5日／第1次審査結果：2026年1月26日／第2次試験：2026年2月25日·3月4日／合格発表：2026年3月10日",
@@ -148,7 +191,7 @@ export const undergraduateAdmissions: UndergraduateAdmissionInfo[] = [
     universityName: "京都大学",
     type: "national",
     portalUrl: "https://www.kyoto-u.ac.jp/ja/admissions/undergraduate",
-    admissionSystem: "学部ごとに入试制度不同。工学部有「私費外国人留学生特別選考」。Kyoto iUP（国際本科プログラム）覆盖10学部（全学35名枠）。文系多数学部无留学生特别枠，需与日本学生参加同一一般入试（共通テスト+個別試験）。",
+    admissionSystem: "学部ごとに入试制度不同。工学部有「私費外国人留学生特別選考」。Kyoto iUP（国際本科プログラム）覆盖10学部（全学35名枠·10月入学·6个月準備課程）。文系多数学部无留学生特别枠，需与日本学生参加同一一般入试（共通テスト+個別試験）。",
     ejuPolicy: "工学部私費外国人入试：日本語+数学2+物理+化学（合计680+或650+且数理化350+）。iUP不要求日语成绩（入學後補習）。文系一般入试需共通テスト。",
     ejuReferenceScores:
       "【工学部私費留学生選抜】日本語320+ / 数学2 180+ / 物理+化学 180+ → 総合680+。【iUP】不要求EJU/日语。TOEFL iBT 80+ / IELTS 6.0+（推荐）。【一般入試】共通テスト85%+ 二次試験偏差値65+。",
@@ -156,63 +199,67 @@ export const undergraduateAdmissions: UndergraduateAdmissionInfo[] = [
       {
         name: "総合人間学部",
         nameJa: "総合人間学部",
-        departments: ["総合人間学科（人間科学·文化·社会·自然科学の学際分野）"],
+        departments: ["総合人間学科（人間科学系：教育学·心理学·社会学·文化人類学）", "（文化系：哲学·文学·歴史·芸術·言語情報）", "（自然系：数学·物理学·化学·生物学·情報科学）"],
         hasInternationalAdmission: true,
-        admissionType: "Kyoto iUP（10月入学·6个月准备课程）",
+        admissionType: "Kyoto iUP（10月入学·6个月準備課程）",
         englishRequirements: "TOEFL iBT 72+ / IELTS 6.0+",
-        notes: "无单独留学生选考；iUP経由可"
+        notes: "日本唯一将人文·社会·自然三大領域融合在一个学部的文理融合型学部。无单独留学生选考；iUP経由可。"
       },
       {
         name: "文学部",
         nameJa: "文学部",
-        departments: ["人文学科（哲学·倫理学·歴史学·文学·言語学·心理学）"],
+        departments: ["哲学基礎文化学系（哲学·倫理学·宗教学·美学芸術学·日本哲学史）", "東洋文化学系（国語学国文学·中国語学中国文学·中国哲学史·インド古典学·仏教学·東洋史学）", "西洋文化学系（西洋古典学·スラブ語学·英語英米文学·独語独文学·仏語仏文学·イタリア語学イタリア文学）", "歴史基礎文化学系（日本史学·東洋史学·西洋史学·考古学）", "行動·環境文化学系（言語学·心理学·社会学·地理学）"],
         hasInternationalAdmission: true,
-        admissionType: "Kyoto iUP（10月入学）· 一般不设留学生特别选考",
+        admissionType: "Kyoto iUP（10月入学）· 不設留学生特别选考",
         englishRequirements: "TOEFL iBT 72+ / IELTS 6.0+",
-        notes: "留学生基本走iUP路线"
+        notes: "5学系20+専門分野覆盖人文社会全部领域。留学生基本走iUP路线"
       },
       {
         name: "教育学部",
         nameJa: "教育学部",
-        departments: ["教育科学科"],
+        departments: ["教育科学科（現代教育基礎学系：教育哲学·教育史学·教育方法学·発達教育学）", "（教育心理学系：認知心理学·発達心理学·臨床心理学）", "（相関教育システム論系：比較教育学·教育社会学·生涯教育学·高等教育論）"],
         hasInternationalAdmission: true,
         admissionType: "Kyoto iUP（10月入学）",
-        englishRequirements: "TOEFL iBT 72+ / IELTS 6.0+"
+        englishRequirements: "TOEFL iBT 72+ / IELTS 6.0+",
+        notes: "3学系融合学科。教育心理学系人气极高"
       },
       {
         name: "法学部",
         nameJa: "法学部",
-        departments: ["法学·政治学（基礎法学·公法·民刑事法·政治学）"],
+        departments: ["法学·政治学（基礎法学：法制史·法哲学·法社会学·比較法）", "（公法系：憲法·行政法·租税法·国際法）", "（民刑事法系：民法·商法·民事訴訟法·刑法·刑事訴訟法）", "（政治学系：政治理論·比較政治·国際政治·政治史）"],
         hasInternationalAdmission: true,
         admissionType: "Kyoto iUP（10月入学）· 无留学生特别选考",
-        englishRequirements: "TOEFL iBT 72+ / IELTS 6.0+"
+        englishRequirements: "TOEFL iBT 72+ / IELTS 6.0+",
+        notes: "京都大学看板学部之一。留学生一般入试难度极高（共通テスト+面接）。"
       },
       {
         name: "経済学部",
         nameJa: "経済学部",
-        departments: ["経済学科", "経営学科"],
+        departments: ["経済学科（経済理論·経済政策·国際経済·開発経済·経済史）", "経営学科（経営戦略·経営組織·マーケティング·会計·ファイナンス）"],
         hasInternationalAdmission: true,
         admissionType: "Kyoto iUP（10月入学）",
         englishRequirements: "TOEFL iBT 72+ / IELTS 6.0+",
-        notes: "経営学科人气极高"
+        acceptanceRate: "経営学科人气极高（一般入试偏差值67.5）",
+        notes: "経営学科是日本国立大学中极少数独立设置。理论經濟学日本顶级。"
       },
       {
         name: "理学部",
         nameJa: "理学部",
-        departments: ["数学科", "物理学科", "化学科", "生物学科", "地球惑星科学科"],
+        departments: ["数学科（代数·幾何·解析·数理科学）", "物理学科（理論物理·素粒子·宇宙物理·物性物理）", "宇宙物理学教室", "地球惑星科学科（地球物理学·地質学·気象学·海洋科学）", "化学科（物理化学·無機化学·有機化学·生物化学）", "生物科学科（分子生物学·細胞生物学·生態学·進化学）"],
         hasInternationalAdmission: true,
         admissionType: "Kyoto iUP + 一般入试",
-        englishRequirements: "TOEFL iBT 72+ / IELTS 6.0+"
+        englishRequirements: "TOEFL iBT 72+ / IELTS 6.0+",
+        notes: "物理学教室和数学教室日本Top级别。ノーベル賞輩出多数。"
       },
       {
         name: "工学部",
         nameJa: "工学部",
-        departments: ["地球工学科", "建築学科", "物理工学科", "電気電子工学科", "理工化学科"],
+        departments: ["地球工学科（土木工学·環境工学·資源工学）", "建築学科（建築デザイン·建築構造·建築環境·都市計画）", "物理工学科（機械システム·材料科学·原子核工学·宇宙工学）", "電気電子工学科（電子物性·集積回路·通信システム·電力工学）", "情報学科（計算機科学·ソフトウェア·知能情報·通信情報·数理工学）", "理工化学科（創成化学·化学プロセス·分子工学）"],
         hasInternationalAdmission: true,
         admissionType: "私費外国人留学生特別選考 + Kyoto iUP + ICP英语课程",
-        ejukRequirements: "日本語+数学2+物理+化学（合计680+）",
+        ejukRequirements: "日本語+数学2+物理+化学（合计680+或650+且数理化350+）",
         englishRequirements: "TOEFL iBT 72+ / IELTS 6.0+",
-        notes: "唯一有独立留学生特别选考的学部；EJU要求明确；事前審査必须"
+        notes: "日本唯一有独立留学生特别选考的学部（京大特色）。情報学科是理工人气最高之一。ICP英语课程面向留学生。"
       },
       {
         name: "医学部",
@@ -511,6 +558,7 @@ export const undergraduateAdmissions: UndergraduateAdmissionInfo[] = [
       { name: "医学部", nameJa: "医学部", departments: ["医学科（6年制）", "保健学科"], hasInternationalAdmission: false, admissionType: "一般入试", notes: "留学生枠极少" },
       { name: "農学部", nameJa: "農学部", departments: ["生物環境科学科", "資源生物科学科", "応用生命科学科"], hasInternationalAdmission: true, admissionType: "私費外国人留学生選抜", ejukRequirements: "日本語+数学2+理科（2科目）" },
       { name: "情報学部", nameJa: "情報学部", departments: ["自然情報学科", "人間·社会情報学科", "コンピュータ科学科"], hasInternationalAdmission: true, admissionType: "私費外国人留学生選抜", ejukRequirements: "日本語+数学2+理科", notes: "日本少数独立情报学部" },
+      { name: "教育学部", nameJa: "教育学部", departments: ["人間発達科学科（教育学·教育心理学·発達臨床学·学校心理学）"], hasInternationalAdmission: true, admissionType: "私費外国人留学生選抜", ejukRequirements: "日本語+総合科目+数学1" },
     ],
     tuitionInfo: { examFee: "17,000円", admissionFee: "282,000円", annualTuition: "535,800円" },
     livingCosts: {
@@ -552,6 +600,7 @@ export const undergraduateAdmissions: UndergraduateAdmissionInfo[] = [
       { name: "獣医学部", nameJa: "獣医学部", departments: ["獣医学科（6年制）"], hasInternationalAdmission: true, admissionType: "私費外国人留学生入試", ejukRequirements: "日本語+数学2+理科（2科目）", notes: "全国罕见留学生可考的兽医学科" },
       { name: "水産学部", nameJa: "水産学部", departments: ["水産学科"], hasInternationalAdmission: true, admissionType: "私費外国人留学生入試", ejukRequirements: "日本語+数学2+理科", notes: "日本少数独立水产学部" },
       { name: "薬学部", nameJa: "薬学部", departments: ["薬学科（6年制）", "薬科学科（4年制）"], hasInternationalAdmission: true, admissionType: "私費外国人留学生入試", ejukRequirements: "日本語+数学2+理科（化学+物理/生物）" },
+      { name: "教育学部", nameJa: "教育学部", departments: ["教育学科（教育学·教育心理学·教育社会学·生涯学習·特別支援教育）"], hasInternationalAdmission: true, admissionType: "私費外国人留学生入試", ejukRequirements: "日本語+総合科目+数学1" },
     ],
     tuitionInfo: { examFee: "17,000円", admissionFee: "282,000円", annualTuition: "535,800円" },
     livingCosts: {
@@ -593,6 +642,8 @@ export const undergraduateAdmissions: UndergraduateAdmissionInfo[] = [
       { name: "歯学部", nameJa: "歯学部", departments: ["歯学科（6年制）"], hasInternationalAdmission: false, admissionType: "一般入试" },
       { name: "芸術工学部", nameJa: "芸術工学部", departments: ["デザイン学科", "音響設計学科", "画像設計学科", "環境設計学科"], hasInternationalAdmission: true, admissionType: "私費外国人留学生入試", ejukRequirements: "日本語+総合科目+数学1或理科", notes: "日本少有的艺术工学结合学部" },
       { name: "薬学部", nameJa: "薬学部", departments: ["薬学科（6年制）", "創薬科学科（4年制）"], hasInternationalAdmission: true, admissionType: "私費外国人留学生入試", ejukRequirements: "日本語+数学2+理科（化学+物理/生物）" },
+      { name: "教育学部", nameJa: "教育学部", departments: ["教育学科（教育学·教育心理学·教育社会学·比較教育学）"], hasInternationalAdmission: true, admissionType: "私費外国人留学生入試", ejukRequirements: "日本語+総合科目+数学1" },
+      { name: "共創学部", nameJa: "共創学部", departments: ["共創学科（文理融合·課題解決型學際学部·2018年新設）"], hasInternationalAdmission: true, admissionType: "私費外国人留学生入試 + 英語プログラム", ejukRequirements: "日本語+総合科目+数学1或2", notes: "2018年新設。留学生人气急升。文理横断型。全英文授课可选。" },
     ],
     tuitionInfo: { examFee: "17,000円", admissionFee: "282,000円", annualTuition: "535,800円" },
     livingCosts: {
@@ -723,7 +774,7 @@ export const undergraduateAdmissions: UndergraduateAdmissionInfo[] = [
       {
         name: "法学部",
         nameJa: "法学部",
-        departments: ["法学科"],
+        departments: ["法学科（法律主専攻·政治主専攻·国際関係主専攻）"],
         hasInternationalAdmission: true,
         admissionType: "外国人留学生特別選抜",
         ejukRequirements: "日本語+総合科目+数学1",
@@ -732,73 +783,107 @@ export const undergraduateAdmissions: UndergraduateAdmissionInfo[] = [
       {
         name: "商学部",
         nameJa: "商学部",
-        departments: ["商学科"],
+        departments: ["商学科（経営コース·会計コース·マーケティング·国際ビジネスコース·金融·保険コース）", "国際教養コース（英語学位·GEP）"],
         hasInternationalAdmission: true,
-        admissionType: "外国人留学生特別選抜",
+        admissionType: "外国人留学生特別選抜 + GEP英语コース",
         ejukRequirements: "日本語+総合科目+数学1",
-        englishRequirements: "TOEFL iBT / IELTS",
-        notes: "人气最高学部之一"
+        englishRequirements: "TOEFL iBT 70+ / IELTS 5.5+",
+        notes: "人气最高学部之一。GEP全英文経営コース可。経営·会計·金融方向就业率极高。"
       },
       {
         name: "社会科学部",
         nameJa: "社会科学部",
-        departments: ["社会科学科"],
+        departments: ["社会科学科（社会科学総合·地域研究·国際社会·政策研究·情報社会）"],
         hasInternationalAdmission: true,
         admissionType: "外国人留学生特別選抜",
-        ejukRequirements: "日本語+総合科目+数学1"
+        ejukRequirements: "日本語+総合科目+数学1",
+        notes: "日本少数将社会科学独立为学部的大学。包容所有社会科学分野。"
       },
       {
         name: "国際教養学部 (SILS)",
         nameJa: "国際教養学部",
-        departments: ["国際教養学科（全英文授课）"],
+        departments: ["国際教養学科（全英文授课）", "APM Program（国際経営·経済）"],
         hasInternationalAdmission: true,
-        admissionType: "英语选考（不要求EJU·日本語）",
+        admissionType: "英語選考（不要求EJU·日本語）",
         englishRequirements: "TOEFL iBT 80+ / IELTS 6.5+",
-        notes: "最受留学生欢迎的学部之一；全英文授课"
+        notes: "最受留学生欢迎的学部之一；全英文授课；约80名/年"
       },
       {
         name: "文化構想学部",
         nameJa: "文化構想学部",
-        departments: ["文化構想学科（多元文化·複合文化·表象·文芸·ジャーナリズム等）"],
+        departments: ["多元文化論系（アジア·欧米·中東·イスラム文化）", "複合文化論系（比較文化·翻訳·映像·言語科学）", "表象·メディア論系（デジタルメディア·映画·ポップカルチャー）", "文芸·ジャーナリズム論系（文学創作·出版·報道·メディア情報）", "現代人間論系（心理学·社会学·カルチュラルスタディーズ）", "社会構築論系（ジェンダー·環境·都市·NGO·社会デザイン）"],
         hasInternationalAdmission: true,
         admissionType: "外国人留学生特別選抜",
-        ejukRequirements: "日本語+総合科目+数学1"
+        ejukRequirements: "日本語+総合科目+数学1",
+        notes: "日本特色最鲜明的文系学部之一。6论系制，不同于传统学科制。留学生人气极高。"
       },
       {
         name: "文学部",
         nameJa: "文学部",
-        departments: ["文学科（哲学·史学·文学·心理学·言語学等）"],
+        departments: ["哲学コース（哲学·倫理学·美学芸術学）", "東洋哲学コース（中国哲学·インド哲学·仏教学）", "心理学コース（実験心理学·臨床心理学·発達心理学）", "社会学コース（社会学·文化人類学·メディア社会）", "教育学コース（教育学·教育心理学·学校教育）", "日本語日本文学コース", "中国語中国文学コース", "英語英文学コース", "演劇映像コース（演劇学·映像文化·パフォーマンス）", "文芸·ジャーナリズムコース"],
         hasInternationalAdmission: true,
         admissionType: "外国人留学生特別選抜",
-        ejukRequirements: "日本語+総合科目+数学1"
+        ejukRequirements: "日本語+総合科目+数学1",
+        notes: "18のコースを有する大規模文学部。留学生に人気の心理学·社会学コースあり。"
       },
       {
         name: "教育学部",
         nameJa: "教育学部",
-        departments: ["教育学专攻", "英語英文学科（取消留学生入试）"],
+        departments: ["教育学科（教育学専攻·教育学·生涯教育学·教育心理学·教育社会学·教育方法学）", "国語国文学科（日文·日本語教育）", "社会科（地理歴史·社会科学·公民教育）"],
         hasInternationalAdmission: true,
-        admissionType: "外国人留学生特別選抜（部分学科取消，需确认）",
+        admissionType: "外国人留学生特別選抜（部分学科取消·需确认）",
         ejukRequirements: "日本語+総合科目+数学1",
-        notes: "⚠️ 部分学科2026年起取消留学生入试，需通过一般入试或确认募集要项"
+        notes: "⚠️ 英語英文学科·理学科·数学科2026年起取消留学生入试。教育学専攻·国語国文学科·社会科保留。"
       },
       {
         name: "人間科学部",
         nameJa: "人間科学部",
-        departments: ["人間科学科（人間情報·健康福祉·社会文化等）"],
+        departments: ["人間環境科学科（環境デザイン·都市環境·エコロジー）", "健康福祉科学科（健康科学·社会福祉·臨床心理·公衆衛生）", "人間情報科学科（認知科学·AI·データサイエンス·情報デザイン）"],
         hasInternationalAdmission: true,
         admissionType: "外国人留学生特別選抜",
-        ejukRequirements: "日本語+数学1+理科（3选1）"
+        ejukRequirements: "日本語+数学1+理科（3选1）",
+        notes: "文理融合型学部。理系入试也可入（数学1+理科）。"
       },
       {
-        name: "理工学部",
-        nameJa: "理工学部",
-        departments: ["機械科学·航空宇宙科", "電気·情報生命工学科", "物理学科", "応用化学科", "経営システム工学科", "環境資源工学科", "生命医科学科"],
+        name: "スポーツ科学部",
+        nameJa: "スポーツ科学部",
+        departments: ["スポーツ科学科（スポーツ医学·トレーニング科学·スポーツ経営·スポーツ文化）"],
+        hasInternationalAdmission: true,
+        admissionType: "外国人留学生特別選抜",
+        ejukRequirements: "日本語+総合科目+数学1或2",
+        notes: "日本少有的独立スポーツ科学部。箱根駅伝等运动竞技強豪。"
+      },
+      {
+        name: "基幹理工学部",
+        nameJa: "基幹理工学部",
+        departments: ["数学科", "応用数理学科（数理モデル·統計科学·計算数理）", "情報理工学科（CS·ソフトウェア·情報ネットワーク）", "機械科学·航空宇宙学科（機械工学·航空宇宙工学·ロボティクス）", "電子物理システム学科（半導体·量子·光エレクトロニクス）", "表現工学科（メディアアート·CG·音響·UI/UX）"],
         hasInternationalAdmission: true,
         admissionType: "外国人留学生特別選抜（書類選考+面接）",
         ejukRequirements: "日本語+数学2+理科（物理+化学或物理+生物）",
         englishRequirements: "TOEFL iBT / IELTS",
-        notes: "7学科，留学生枠较为充足"
+        notes: "早稲田最強の理系学部群の一つ。表現工学科は芸術×工学の融合。情報理工人气最高。"
       },
+      {
+        name: "創造理工学部",
+        nameJa: "創造理工学部",
+        departments: ["建築学科（建築デザイン·建築構造·建築環境·都市設計）", "総合機械工学科（設計·生産·システム·人間工学）", "経営システム工学科（IE·OR·経営工学·データ科学）", "社会環境工学科（土木工学·環境工学·都市計画）", "環境資源工学科（資源循環·エネルギー·地球環境·リサイクル工学）"],
+        hasInternationalAdmission: true,
+        admissionType: "外国人留学生特別選抜（書類選考+面接）",
+        ejukRequirements: "日本語+数学2+理科（物理+化学或物理+生物）",
+        englishRequirements: "TOEFL iBT / IELTS",
+        notes: "建築学科人气极高（建築家·隈研吾出身校）。経営システム工学科是理工×経営融合。"
+      },
+      {
+        name: "先進理工学部",
+        nameJa: "先進理工学部",
+        departments: ["物理学科（理論物理·実験物理·宇宙物理）", "応用物理学科（量子科学·ナノテク·光物性）", "化学·生命化学科（物理化学·無機化学·生命化学）", "応用化学科（材料化学·高分子·触媒化学）", "生命医科学科（分子生物学·医用工学·再生医療·創薬科学）", "電気·情報生命工学科（電子デバイス·バイオセンサー·医工情報）"],
+        hasInternationalAdmission: true,
+        admissionType: "外国人留学生特別選抜（書類選考+面接）",
+        ejukRequirements: "日本語+数学2+理科（物理+化学或化学+生物）",
+        englishRequirements: "TOEFL iBT / IELTS",
+        notes: "生命医科学科（旧·生命理工）人气最高。最先端研究+医学部並み実験環境。産学連携最多。"
+      },
+
       {
         name: "スポーツ科学部",
         nameJa: "スポーツ科学部",
@@ -842,11 +927,12 @@ export const undergraduateAdmissions: UndergraduateAdmissionInfo[] = [
       {
         name: "文学部",
         nameJa: "文学部",
-        departments: ["人文学科（哲学·史学·文学·図書館情報学）"],
+        departments: ["人文社会学科·哲学系（哲学·倫理学·美学芸術学）", "史学系（日本史学·東洋史学·西洋史学·民族学考古学）", "文学系（国文学·中国文学·英米文学·独文学·仏文学）", "図書館·情報学系（情報資源管理·デジタルアーカイブ·学術情報）", "人間関係系（社会学·心理学·教育学·人間科学）"],
         hasInternationalAdmission: true,
         admissionType: "外国人留学生特別選抜",
         ejukRequirements: "日本語+総合科目+数学1",
-        englishRequirements: "TOEFL iBT / IELTS"
+        englishRequirements: "TOEFL iBT / IELTS",
+        notes: "17の専門分野を5系に統合。三田キャンパスの伝統学部。"
       },
       {
         name: "経済学部",
@@ -923,6 +1009,16 @@ export const undergraduateAdmissions: UndergraduateAdmissionInfo[] = [
         admissionType: "外国人留学生特別選抜",
         ejukRequirements: "日本語+数学2+理科（化学+物理/生物）",
         englishRequirements: "TOEFL iBT / IELTS"
+      },
+      {
+        name: "看護医療学部",
+        nameJa: "看護医療学部",
+        departments: ["看護学科（看護学·公衆衛生看護学·助産学）"],
+        hasInternationalAdmission: true,
+        admissionType: "外国人留学生特別選抜",
+        ejukRequirements: "日本語+数学1+理科（化学·生物中1科）",
+        englishRequirements: "TOEFL iBT / IELTS",
+        notes: "SFC湘南藤沢キャンパス。看護師·保健師·助産師国家試験受験資格取得可能。"
       },
     ],
     tuitionInfo: { examFee: "17,000円", admissionFee: "200,000円", annualTuition: "1,050,000〜1,700,000円（学部不同）" },
