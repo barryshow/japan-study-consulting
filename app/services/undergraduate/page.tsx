@@ -2,14 +2,12 @@ import { Container } from "@/components/ui/Container";
 import { SectionTitle } from "@/components/shared/SectionTitle";
 import { Breadcrumb } from "@/components/shared/Breadcrumb";
 import { Button } from "@/components/ui/Button";
-import { SchoolListSection } from "@/components/shared/SchoolListSection";
-import { UndergraduateAdmissionDetail } from "@/components/shared/UndergraduateAdmissionDetail";
+import { UndergraduateUniversityList } from "@/components/undergraduate/UndergraduateUniversityList";
 import { services } from "@/data/services";
-import { nationalUniversities, privateUniversities } from "@/data/schools";
+import { undergraduateExamOverview } from "@/data/university-faculties";
 
 export default function UndergraduatePage() {
   const service = services.find((s) => s.slug === "undergraduate")!;
-  const allUniversities = [...nationalUniversities, ...privateUniversities];
 
   return (
     <>
@@ -57,47 +55,51 @@ export default function UndergraduatePage() {
         </section>
       ))}
 
-      <SchoolListSection
-        title="可申请的日本大学"
-        subtitle="含国公立和私立名校，SGU英文项目可无日语申请"
-      >
-        {allUniversities.filter(u => u.programs.some(p => p.level === "undergraduate")).map((uni) => (
-          <div key={uni.id} className="rounded-xl border border-zinc-200 bg-white p-6">
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <h3 className="text-xl font-bold text-primary-900">{uni.name}</h3>
-                <p className="text-sm text-zinc-500">{uni.nameJa}</p>
-              </div>
-              <span className="shrink-0 rounded-full bg-primary-100 px-2 py-0.5 text-xs font-medium text-primary-700">
-                {uni.type === "national" ? "国立" : "私立"}
-              </span>
-            </div>
-            <p className="mt-1 text-sm text-zinc-500">📍 {uni.location}</p>
-            <p className="mt-3 text-sm font-medium text-primary-800">{uni.highlights}</p>
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              <span className="rounded-md bg-zinc-100 px-2 py-1 text-xs text-zinc-600">学费：{uni.tuition}</span>
-              <span className="rounded-md bg-zinc-100 px-2 py-1 text-xs text-zinc-600">GPA：{uni.gpaRequirement}</span>
-              <span className="rounded-md bg-zinc-100 px-2 py-1 text-xs text-zinc-600">日语：{uni.japaneseRequirement}</span>
-            </div>
-            <div className="mt-4 space-y-2">
-              {uni.programs.filter(p => p.level === "undergraduate").map((p) => (
-                <div key={p.name} className="rounded-lg bg-zinc-50 p-3">
-                  <div className="text-sm font-semibold text-primary-900">{p.name}</div>
-                  <p className="mt-1 text-xs text-zinc-600 leading-relaxed">{p.description}</p>
-                  <div className="mt-1.5 flex flex-wrap gap-1">
-                    {p.features.map((f) => (
-                      <span key={f} className="rounded bg-accent-50 px-1.5 py-0.5 text-xs text-accent-600">{f}</span>
-                    ))}
-                  </div>
+      {/* 统一本科大学列表 — 搜索筛选 + 学部·入试详情 */}
+      <UndergraduateUniversityList />
+
+      {/* ======== 入试制度总览 ======== */}
+      <section className="py-16 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="rounded-xl bg-primary-50 p-8">
+            <h3 className="text-xl font-bold text-primary-900">{undergraduateExamOverview.title}</h3>
+            <p className="mt-2 text-sm text-zinc-600">{undergraduateExamOverview.description}</p>
+
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {undergraduateExamOverview.examTypes.map((exam) => (
+                <div key={exam.name} className="rounded-lg bg-white p-4 border border-zinc-200">
+                  <h4 className="text-sm font-bold text-primary-900">{exam.name}</h4>
+                  <p className="mt-1 text-xs text-zinc-600 leading-relaxed">{exam.description}</p>
+                  {exam.requirements && (
+                    <div className="mt-2 rounded bg-zinc-50 p-2">
+                      <p className="text-xs text-zinc-500"><span className="font-semibold">要求：</span>{exam.requirements}</p>
+                    </div>
+                  )}
+                  {exam.ejuDates && (
+                    <p className="mt-1 text-xs text-zinc-400">{exam.ejuDates}</p>
+                  )}
                 </div>
               ))}
             </div>
+
+            {undergraduateExamOverview.timeline && (
+              <div className="mt-8">
+                <h4 className="text-lg font-bold text-primary-900">{undergraduateExamOverview.timeline.title}</h4>
+                <div className="mt-4 space-y-3">
+                  {undergraduateExamOverview.timeline.steps.map((step, i) => (
+                    <div key={i} className="flex items-center gap-3">
+                      <span className="shrink-0 flex h-7 w-7 items-center justify-center rounded-full bg-primary-600 text-xs font-bold text-white">{i + 1}</span>
+                      <span className="text-sm text-zinc-700">{step}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
-        ))}
-      </SchoolListSection>
+        </div>
+      </section>
 
-      <UndergraduateAdmissionDetail />
-
+      {/* CTA */}
       <section className="py-16 bg-primary-700">
         <Container>
           <div className="text-center">

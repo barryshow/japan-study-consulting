@@ -2,6 +2,7 @@ import { vocationalSchools } from "@/data/schools/vocational-schools";
 import { languageSchools } from "@/data/schools/language-schools";
 import { nationalUniversities, publicUniversities, privateUniversities } from "@/data/schools/universities";
 import { universitiesGraduateData } from "@/data/university-graduate-programs";
+import { undergraduateAdmissions } from "@/data/university-faculties";
 import { services } from "@/data/services";
 import type { VocationalSchool } from "@/data/schools/vocational-schools";
 import type { LanguageSchool } from "@/data/schools/language-schools";
@@ -30,6 +31,8 @@ interface SearchableItem {
 
 // 研究科详细数据查找表
 const gradDataMap = new Map(universitiesGraduateData.map(g => [g.universityId, g]));
+// 学部本科入试数据查找表
+const undergradMap = new Map(undergraduateAdmissions.map(a => [a.universityId, a]));
 
 function getGradKeywords(universityId: string): string[] {
   const detail = gradDataMap.get(universityId);
@@ -43,6 +46,16 @@ function getGradKeywords(universityId: string): string[] {
         words.push(prof.name, prof.nameEn ?? "", prof.researchArea);
       }
     }
+  }
+  return words;
+}
+
+function getUndergradKeywords(universityId: string): string[] {
+  const detail = undergradMap.get(universityId);
+  if (!detail) return [];
+  const words: string[] = [detail.ejuPolicy, detail.ejuReferenceScores];
+  for (const fac of detail.faculties) {
+    words.push(fac.name, fac.nameJa, ...fac.departments, fac.admissionType, fac.ejukRequirements ?? "", fac.notes ?? "");
   }
   return words;
 }
@@ -90,6 +103,7 @@ function buildItems(): SearchableItem[] {
       ...u.features, ...u.suitableFor,
       ...u.programs.flatMap((p) => [p.name, p.description, ...p.features]),
       ...getGradKeywords(u.id),
+      ...getUndergradKeywords(u.id),
     ];
     items.push({
       id: u.id,
