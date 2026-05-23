@@ -50,11 +50,27 @@ export default function GraduatePage() {
           <Container>
             <div className="max-w-3xl">
               <h2 className="text-2xl font-bold text-primary-900">{section.heading}</h2>
-              <p className="mt-4 text-zinc-600 leading-relaxed">{section.content}</p>
+              <div className="mt-4 text-zinc-600 leading-relaxed whitespace-pre-line">{section.content}</div>
             </div>
           </Container>
         </section>
       ))}
+
+      {/* 申请指南入口 */}
+      <section className="py-12 bg-primary-50">
+        <Container>
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="text-4xl mb-4">📘</div>
+            <h2 className="text-2xl font-bold text-primary-900">大学院申请全流程指南</h2>
+            <p className="mt-3 text-zinc-600">
+              四条申请路径详解 · 研究计划书写作指导 · 教授套词策略与邮件模板 · 完整申请时间线
+            </p>
+            <Button href="/services/graduate/guide" size="lg" className="mt-6">
+              查看完整指南 →
+            </Button>
+          </div>
+        </Container>
+      </section>
 
       <SchoolListSection
         title="国公立大学院"
@@ -86,7 +102,7 @@ export default function GraduatePage() {
               </div>
             )}
             <div className="mt-4 space-y-2">
-              {uni.programs.filter(p => p.level === "graduate").slice(0, 2).map((p) => (
+              {uni.programs.filter(p => p.level === "graduate").slice(0, 3).map((p) => (
                 <div key={p.name} className="rounded-lg bg-zinc-50 p-3">
                   <div className="text-sm font-semibold text-primary-900">{p.name}</div>
                   <p className="mt-1 text-xs text-zinc-600 leading-relaxed">{p.description}</p>
@@ -97,6 +113,11 @@ export default function GraduatePage() {
                   </div>
                 </div>
               ))}
+              {uni.programs.filter(p => p.level === "graduate").length > 3 && (
+                <p className="text-xs text-zinc-400 text-center mt-1">
+                  还有 {uni.programs.filter(p => p.level === "graduate").length - 3} 个项目，详见下方展开区
+                </p>
+              )}
             </div>
           </div>
         ))}
@@ -132,7 +153,7 @@ export default function GraduatePage() {
               </div>
             )}
             <div className="mt-4 space-y-2">
-              {uni.programs.filter(p => p.level === "graduate").slice(0, 2).map((p) => (
+              {uni.programs.filter(p => p.level === "graduate").slice(0, 3).map((p) => (
                 <div key={p.name} className="rounded-lg bg-zinc-50 p-3">
                   <div className="text-sm font-semibold text-primary-900">{p.name}</div>
                   <p className="mt-1 text-xs text-zinc-600 leading-relaxed">{p.description}</p>
@@ -143,6 +164,11 @@ export default function GraduatePage() {
                   </div>
                 </div>
               ))}
+              {uni.programs.filter(p => p.level === "graduate").length > 3 && (
+                <p className="text-xs text-zinc-400 text-center mt-1">
+                  还有 {uni.programs.filter(p => p.level === "graduate").length - 3} 个项目，详见下方展开区
+                </p>
+              )}
             </div>
           </div>
         ))}
