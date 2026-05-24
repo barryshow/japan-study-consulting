@@ -6,7 +6,12 @@ import { GoogleGenAI } from "@google/genai";
 const MODEL = "gemini-2.5-flash-lite";
 
 export interface AIAnalysisRequest {
-  studentProfile: string;      // 学生背景描述文本
+  stage: "undergraduate" | "graduate";
+  major: string;                // 本科专业 or 目标专业
+  targetField: string;          // 目标研究方向 or 目标专业方向
+  hasResearchProposal: boolean;
+  hasPublications: boolean;
+  studentProfile: string;
   studentScore: number;
   maxScore: number;
   scoreBreakdown: { label: string; score: number; maxScore: number; detail: string }[];
@@ -24,10 +29,20 @@ export interface AIAnalysisResponse {
 }
 
 function buildPrompt(req: AIAnalysisRequest): string {
-  return `你是一位资深的日本留学顾问。请基于以下学生背景和学校匹配结果，给出个性化的分析建议。
+  const stageLabel = req.stage === "graduate" ? "大学院（修士）" : "学部（本科）";
+  return `你是一位资深的日本留学顾问。请基于以下学生背景和学校匹配结果，给出个性化的分析建议。注意学生的专业方向，只分析与其专业相关的申请情况。
 
 ## 学生背景
 ${req.studentProfile}
+
+## 申请阶段
+${stageLabel}
+
+## 学生专业方向
+本科专业/目标专业：${req.major || "未填写"}
+目标研究方向/专业方向：${req.targetField || "未填写"}
+${req.stage === "graduate" ? `研究计划书：${req.hasResearchProposal ? "已准备" : "未准备"}
+论文/科研经历：${req.hasPublications ? "有" : "无"}` : ""}
 
 ## 综合评分
 ${req.studentScore}/${req.maxScore}
@@ -45,16 +60,17 @@ ${req.matchSchools.map(s => `- ${s.name}（${s.nameJa}）${s.type === "national"
 ${req.safeSchools.map(s => `- ${s.name}（${s.nameJa}）${s.type === "national" ? "国立" : s.type === "public" ? "公立" : "私立"} · ${s.region} · 难度${s.difficultyScore}`).join("\n") || "（暂无）"}
 
 ## 要求
-1. 输出 JSON 格式，不要包含 markdown 代码块标记。
+1. 输出 JSON 格式（不要 markdown 代码块标记）。
 2. JSON 字段：
-   - "summary": 一段100-200字的总体评估，分析学生当前背景的优势与不足
-   - "strengths": 数组，列出2-4项该学生的申请优势
+   - "summary": 一段100-200字的总体评估，针对该生的专业方向分析其申请优劣势
+   - "strengths": 数组，列出2-4项该学生的申请优势，必须与其专业方向相关
    - "risks": 数组，列出2-4项需要注意的风险或短板
    - "nextSteps": 数组，列出3-5项具体的下一步行动建议
    - "disclaimer": "以上分析基于通用规则生成，各大学具体入学要求可能随年度调整。请务必以各大学官网公布的最新募集要項为准。本分析不构成录取承诺。"
 3. 不允许编造该学生未提供的具体考试分数、GPA、语言成绩等数据。
 4. 不允许承诺录取或给出录取概率。
-5. 不允许添加冲刺/稳妥/保底名单之外的学校。`;
+5. 不允许添加冲刺/稳妥/保底名单之外的学校。
+6. 分析必须与学生的专业方向匹配。例如理科生推荐理工科方向，文科生推荐人文社科方向。`;
 }
 
 export async function POST(request: Request) {
@@ -83,7 +99,6 @@ export async function POST(request: Request) {
       config: {
         temperature: 0.4,
         maxOutputTokens: 2048,
-        responseMimeType: "application/json",
       },
     });
 
