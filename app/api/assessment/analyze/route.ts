@@ -1,14 +1,13 @@
 // AI 分析 API — POST /api/assessment/analyze
-// 接收学生背景+冲稳保结果，调用 Gemini 生成个性化分析报告
+// 调用 Gemini REST API 生成个性化分析报告
 import { NextResponse } from "next/server";
-import { GoogleGenAI } from "@google/genai";
 
 const MODEL = "gemini-2.5-flash-lite";
 
 export interface AIAnalysisRequest {
   stage: "undergraduate" | "graduate";
-  major: string;                // 本科专业 or 目标专业
-  targetField: string;          // 目标研究方向 or 目标专业方向
+  major: string;
+  targetField: string;
   hasResearchProposal: boolean;
   hasPublications: boolean;
   studentProfile: string;
@@ -60,7 +59,7 @@ ${req.matchSchools.map(s => `- ${s.name}（${s.nameJa}）${s.type === "national"
 ${req.safeSchools.map(s => `- ${s.name}（${s.nameJa}）${s.type === "national" ? "国立" : s.type === "public" ? "公立" : "私立"} · ${s.region} · 难度${s.difficultyScore}`).join("\n") || "（暂无）"}
 
 ## 要求
-1. 输出 JSON 格式（不要 markdown 代码块标记）。
+1. 输出纯 JSON 格式，不要 markdown 代码块标记，不要其他文字。
 2. JSON 字段：
    - "summary": 一段100-200字的总体评估，针对该生的专业方向分析其申请优劣势
    - "strengths": 数组，列出2-4项该学生的申请优势，必须与其专业方向相关
@@ -85,33 +84,52 @@ export async function POST(request: Request) {
     const body: AIAnalysisRequest = await request.json();
     const prompt = buildPrompt(body);
 
-    // 限制输入长度防止刷接口
     if (prompt.length > 8000) {
       return NextResponse.json<AIAnalysisResponse>(
         fallbackAnalysis("输入内容过长"),
       );
     }
 
-    const ai = new GoogleGenAI({ apiKey });
-    const result = await ai.models.generateContent({
-      model: MODEL,
-      contents: prompt,
-      config: {
-        temperature: 0.4,
-        maxOutputTokens: 2048,
-      },
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(MODEL)}:generateContent?key=${encodeURIComponent(apiKey)}`;
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: {
+          temperature: 0.4,
+          maxOutputTokens: 2048,
+        },
+      }),
     });
 
-    const text = result.text;
+    if (!res.ok) {
+      const errText = await res.text();
+      console.error("Gemini API error:", res.status, errText);
+      return NextResponse.json<AIAnalysisResponse>(
+        fallbackAnalysis(`API 返回错误 ${res.status}`),
+      );
+    }
+
+    const data = await res.json();
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
     if (!text) {
       return NextResponse.json<AIAnalysisResponse>(
         fallbackAnalysis("AI 返回为空"),
       );
     }
 
+    // 清理可能的 markdown 代码块标记
+    let cleanText = text.trim();
+    if (cleanText.startsWith("```")) {
+      cleanText = cleanText.replace(/^```(?:json)?\s*\n?/, "").replace(/\n?```\s*$/, "").trim();
+    }
+
     let parsed: AIAnalysisResponse;
     try {
-      parsed = JSON.parse(text);
+      parsed = JSON.parse(cleanText);
     } catch {
       return NextResponse.json<AIAnalysisResponse>(
         fallbackAnalysis("AI 返回格式解析失败"),
@@ -121,6 +139,7 @@ export async function POST(request: Request) {
     return NextResponse.json(parsed);
   } catch (e) {
     const msg = e instanceof Error ? e.message : "未知错误";
+    console.error("Assessment analyze error:", msg);
     return NextResponse.json<AIAnalysisResponse>(
       fallbackAnalysis(msg),
     );
